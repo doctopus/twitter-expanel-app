@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
-// import './styles.css'; // Ensure this file contains your CSS for styling
+// import './styles.module.scss'; // Ensure this file contains your CSS for styling
 
 export default function UpdateBanner({ imagePath, onUpload, className }) {
     const [status, setStatus] = useState('');

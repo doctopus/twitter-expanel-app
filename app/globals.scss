@@ -1,4 +1,4 @@
-/* global.css */
+/* globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
 
@@ -24,4 +24,34 @@ body {
   min-height: 100vh;
   overflow-x: hidden; /* Prevent horizontal scrolling */
   -webkit-font-smoothing:antialiased;
+}
+body {
+  font-family: var(--font-family-base);
+  color: rgb(var(--foreground-rgb));
+  /*background: linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb)));*/
+  background: linear-gradient(180deg, transparent 18em, #fff 30em), url(/grid-cell.svg) 0 0 repeat;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.nav-link {
+  margin: 0 15px;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffcc00;
 }

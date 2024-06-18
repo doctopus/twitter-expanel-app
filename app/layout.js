@@ -1,7 +1,7 @@
 // app/layout.js
 import Link from 'next/link';
-import './global.css';
-import './styles.css';
+import './globals.scss';
+import styles from './layout.module.scss';
 
 export default function RootLayout({ children }) {
     return (
@@ -13,20 +13,20 @@ export default function RootLayout({ children }) {
             <title>Expanela</title>
         </head>
         <body>
-        <header className="site-header">
-            <div className="nav-container">
-                <Link href="/" className="nav-link">Home</Link>
-                <Link href="/xprofile" className="nav-link">XProfile</Link>
+        <header className={styles["site-header"]}>
+            <div className='nav-container'>
+                <Link href="/" className='nav-link'>Home</Link>
+                <Link href="/xprofile" className='nav-link'>XProfile</Link>
             </div>
         </header>
-        <main className="site-content">
-            <section className="site-banner">
-                <h1 className="site-title">Expanela</h1>
-                <p className="site-subtitle">Display Your Tweeter Contributions Graph in Your 𝕏 Profile!</p>
+        <main className={styles["site-content"]}>
+            <section className={styles["site-banner"]}>
+                <h1 className={styles["site-title"]}>Expanela</h1>
+                <p className={styles["site-subtitle"]}>Display Your Tweeter Contributions Graph in Your 𝕏 Profile!</p>
             </section>
             {children}
         </main>
-        <footer className="site-footer">
+        <footer className={styles["site-footer"]}>
             <p>&copy; 2024 Expanela. All rights reserved.</p>
         </footer>
         </body>

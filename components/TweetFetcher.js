@@ -1,7 +1,7 @@
 "use client"; // Mark this component as a Client Component
 
 import { useState } from 'react';
-import './styles.css';
+import './fetcherStyles.module.scss';
 
 const fetchTweetById = async (id) => {
     try {
