@@ -1,0 +1,29 @@
+/* ThemeToggle.module.scss */
+
+/* General button styles */
+.theme-toggle-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.3s, background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Light transparent background on hover */
+    transform: scale(1.1); /* Slightly increase the size on hover */
+  }
+
+  &:focus {
+    outline: none; /* Remove default focus outline */
+  }
+
+  &.dark-mode {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2); /* Different hover color for dark mode */
+    }
+  }
+}

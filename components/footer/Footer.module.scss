@@ -1,0 +1,10 @@
+/* Footer.module.scss */
+
+
+.site-footer {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 20px 0;
+  transition: background-color 0.3s, color 0.3s;
+}

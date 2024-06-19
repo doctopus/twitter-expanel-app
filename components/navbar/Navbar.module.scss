@@ -1,0 +1,85 @@
+/* Define colors and variables */
+$light-background: #ffffff;
+$dark-background: #0D2C5C; /* Updated dark background color */
+$light-text: #000000;
+$dark-text: #ffffff;
+$hover-color: #e9ecef;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+/* Theme classes */
+.theme-light {
+  --background-color: $light-background;
+  --text-color: $light-text;
+}
+
+.theme-dark {
+  --background-color: $dark-background;
+  --text-color: $dark-text;
+}
+
+/* Navbar styling */
+.site-header {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s, color 0.3s;
+  position: fixed; /* Fix the navbar at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure the navbar stays on top of other content */
+  box-shadow: 0 4px 6px $shadow-color; /* Add shadow below the navbar */
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+  transition: color 0.3s, text-decoration 0.3s;
+
+  &:hover {
+    color: $hover-color;
+    text-decoration: underline; /* Add underline on hover */
+  }
+}
+
+/* Dark theme styles */
+.theme-dark .site-header {
+  background-color: $dark-background;
+  color: $dark-text;
+}
+
+.theme-dark .nav-link {
+  color: $dark-text;
+
+  &:hover {
+    color: $hover-color;
+  }
+}
+
+/* Light theme styles */
+.theme-light .site-header {
+  background-color: $light-background;
+  color: $light-text;
+}
+
+.theme-light .nav-link {
+  color: $light-text;
+
+  &:hover {
+    color: $hover-color;
+  }
+}

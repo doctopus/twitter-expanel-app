@@ -3,16 +3,6 @@
 /*.bg-decoration {
     background: linear-gradient(180deg, transparent 18em, #fff 30em), url(public/grid-cell.svg) 0 0 repeat;
 }*/
-.site-header {
-    background: #007DEF; /* Update the background color of the navigation bar */
-    padding: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
 
 .site-content {
     padding-top: 80px; /* Ensure content starts below the navigation bar */

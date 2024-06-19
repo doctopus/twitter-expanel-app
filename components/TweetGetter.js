@@ -1,7 +1,7 @@
 "use client"; // Mark this component as a Client Component
 
 import { useState } from 'react';
-import './getterStyles.module.scss';
+import styles from './getterStyles.module.scss';
 
 const fetchTweets = async (query) => {
     try {
@@ -30,9 +30,9 @@ export default function TweetGetter() {
     };
 
     return (
-        <div className="container">
-            <div className="content">
-                <div className="query-form">
+        <div className={styles.container}>
+            <div className={styles.content}>
+                <div className={styles["query-form"]}>
                     <input
                         type="text"
                         value={query}
@@ -45,7 +45,7 @@ export default function TweetGetter() {
                         value={timeRange}
                         onChange={(e) => setTimeRange(e.target.value)}
                         placeholder="Time range (e.g., 1d)"
-                        className="query-input"
+                        className={styles["query-input"]}
                     />
                     <button className="button" onClick={handleFetchTweets}>
                         {loading ? 'Loading...' : 'Fetch Tweets'}
@@ -53,9 +53,9 @@ export default function TweetGetter() {
                 </div>
                 {loading && <Skeleton />}
                 {!loading && tweets.length > 0 && (
-                    <div className="tweets-container">
+                    <div className={styles["tweets-container"]}>
                         {tweets.map((tweet, index) => (
-                            <div key={index} className="tweet">
+                            <div key={index} className={styles.tweet}>
                                 <p><strong>Date:</strong> {new Date(tweet.tweet_created_at).toLocaleString()}</p>
                                 <p><strong>Text:</strong> {tweet.full_text || 'No text available'}</p>
                             </div>
@@ -69,10 +69,10 @@ export default function TweetGetter() {
 
 const Skeleton = () => {
     return (
-        <div className="skeleton">
-            <div className="skeleton-line"></div>
-            <div className="skeleton-line"></div>
-            <div className="skeleton-line"></div>
+        <div className={styles.skeleton}>
+            <div className={styles["skeleton-line"]}></div>
+            <div className={styles["skeleton-line"]}></div>
+            <div className={styles["skeleton-line"]}></div>
         </div>
     );
 };

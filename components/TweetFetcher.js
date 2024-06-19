@@ -1,7 +1,7 @@
 "use client"; // Mark this component as a Client Component
 
 import { useState } from 'react';
-import './fetcherStyles.module.scss';
+import styles from './fetcherStyles.module.scss';
 
 const fetchTweetById = async (id) => {
     try {
@@ -29,11 +29,11 @@ export default function TweetFetcher() {
     };
 
     return (
-        <div className="container">
-            <div className="content">
+        <div className={styles.container}>
+            <div className={styles.content}>
                 {loading && <Skeleton />}
                 {!loading && tweetData && (
-                    <div className="tweet">
+                    <div className={styles.tweet}>
                         <h2>Tweet Details</h2>
                         <p><strong>Tweet ID:</strong> {tweetData.id_str}</p>
                         <p><strong>Text:</strong> {tweetData.full_text || 'No text available'}</p>
@@ -43,8 +43,8 @@ export default function TweetFetcher() {
                     </div>
                 )}
             </div>
-            <div className="button-container">
-                <button className="button" onClick={handleFetchTweet}>
+            <div className={styles["button-container"]}>
+                <button className={styles.button} onClick={handleFetchTweet}>
                     {loading ? 'Loading...' : 'Fetch Tweet'}
                 </button>
             </div>
@@ -54,10 +54,10 @@ export default function TweetFetcher() {
 
 const Skeleton = () => {
     return (
-        <div className="skeleton">
-            <div className="skeleton-line"></div>
-            <div className="skeleton-line"></div>
-            <div className="skeleton-line"></div>
+        <div className={styles.skeleton}>
+            <div className={styles["skeleton-line"]}></div>
+            <div className={styles["skeleton-line"]}></div>
+            <div className={styles["skeleton-line"]}></div>
         </div>
     );
 };
