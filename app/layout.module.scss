@@ -1,107 +1,14 @@
-/* fetcherStyles.module.scss */
-
-/*.bg-decoration {
-    background: linear-gradient(180deg, transparent 18em, #fff 30em), url(public/grid-cell.svg) 0 0 repeat;
-}*/
-
-.site-content {
-    padding-top: 80px; /* Ensure content starts below the navigation bar */
-    padding: 24px;
-    flex: 1; /* Ensure main content takes up remaining space */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%; /* Ensure it does not exceed viewport width */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+.body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.site-banner {
-    text-align: center;
-    margin: 40px 0; /* Add space around the title section */
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.site-title {
-    font-size: 3.75rem;
-    margin: 0;
-    line-height: 1.2;
-    color: #334155;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.site-subtitle {
-    font-size: 1.25rem;
-    margin: 8px 0 0;
-    line-height: 1.2;
-    color: #333;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.site-footer {
-    padding: 16px;
-    text-align: center;
-    background: #0070f3;
-    color: white;
-    width: 100%; /* Ensure footer spans full width */
-    position: relative; /* Position the footer at the bottom */
-}
-
-.home-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 120px; /* Offset for fixed header */
-    width: 100%; /* Ensure container width adjusts properly */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-}
-
-.intro-section {
-    margin-bottom: 50px;
-    text-align: center;
-}
-
-.intro-heading {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-.intro-text {
-    font-size: 1.2rem;
-}
-
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    width: 100%; /* Ensure it does not exceed viewport width */
-    margin-top: 50px;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-}
-
-.bento-item {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    padding: 16px;
-}
-
-.bento-placeholder {
-    width: 100%;
-    height: 200px;
-    background: #e2e8f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #555;
-    font-size: 1rem;
-    margin-bottom: 16px;
-}
-
-.bento-text {
-    font-size: 1rem;
-    color: #333;
+.main {
+  flex: 1;
+  padding: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 80px; // Adjust based on your Navbar height
 }

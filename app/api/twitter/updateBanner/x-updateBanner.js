@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import { TwitterApi, EUploadMimeType } from 'twitter-api-v2';
 import fs from 'fs';
 import path from 'path';
@@ -36,9 +37,9 @@ export default async function handler(req, res) {
     // Initialize Twitter client
     const twitterClient = new TwitterApi({
         appKey: process.env.X_API_KEY,
-        appSecret: process.env.X_API_SECRET_KEY,
+        appSecret: process.env.X_API_SECRET,
         accessToken: process.env.X_ACCESS_TOKEN,
-        accessSecret: process.env.X_ACCESS_TOKEN_SECRET,
+        accessSecret: process.env.X_ACCESS_SECRET,
     });
 
     try {

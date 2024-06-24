@@ -1,7 +1,7 @@
 "use client"; // Ensure this component is a Client Component
 
 import { useState } from 'react';
-import UpdateBanner from '../../components/UpdateBanner';
+import UpdateBanner from '../../components/UpdateBanner/UpdateBanner';
 import './styles.css'; // Ensure this file contains your CSS for styling
 
 export default function XProfile() {

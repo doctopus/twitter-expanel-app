@@ -1,33 +1,49 @@
-// app/page.js
-import TweetFetcher from '../components/TweetFetcher';
-import TweetGetter from '../components/TweetGetter';
-import styles from './layout.module.scss';
+import React from 'react';
+import { BentoGrid, BentoItem } from '../components/BentoGrid/BentoGrid';
+import styles from './page.module.scss';
 
 export default function Home() {
     return (
-        <div className={styles["home-container"]}>
-            <section className={styles["intro-section"]}>
-                <h2 className={styles["intro-heading"]}>Discover Our Latest Innovations</h2>
-                <p className={styles["intro-text"]}>Scroll down to explore more about what we offer.</p>
-            </section>
+        <div className={styles.container}>
+            <header className={styles.header}>
+                <h1 className={styles.title}>Expanela</h1>
+                <p className={styles.subtitle}>Display Your Tweeter Contributions Graph in Your 𝕏 Profile!</p>
+            </header>
 
-            <div className={styles["bento-grid"]}>
-                <div className={styles["bento-item"]}>
-                    <div className={styles["bento-placeholder"]}>Placeholder Image</div>
-                    <p className={styles["bento-text"]}>This is a description for item 1.</p>
-                </div>
-                <div className={styles["bento-item"]}>
-                    <TweetFetcher/> {/* Add the TweetFetcher component here */}
-                </div>
-                <div className={styles["bento-item"]}>
-                    <TweetGetter/>
-                    <p className={styles["bento-text"]}>This is a description for item 3.</p>
-                </div>
-                <div className={styles["bento-item"]}>
-                    <div className={styles["bento-placeholder"]}>Placeholder Image</div>
-                    <p className={styles["bento-text"]}>This is a description for item 4.</p>
-                </div>
-            </div>
+            <BentoGrid>
+                <BentoItem width={2}>
+                    <h2>Visualize Your Impact</h2>
+                    <p>See your Twitter activity come to life with our beautiful, interactive graphs.</p>
+                </BentoItem>
+                <BentoItem width={1}>
+                    <h2>Easy Integration</h2>
+                    <p>Seamlessly add your contribution graph to your Twitter profile with just a few clicks.</p>
+                </BentoItem>
+                <BentoItem width={1}>
+                    <h2>Customizable Themes</h2>
+                    <p>Choose from a variety of color schemes and styles to match your personal brand.</p>
+                </BentoItem>
+                <BentoItem width={2}>
+                    <h2>Insightful Analytics</h2>
+                    <p>Gain valuable insights into your Twitter engagement and growth over time.</p>
+                </BentoItem>
+                <BentoItem width={2}>
+                    <h2>Real-time Updates</h2>
+                    <p>Your graph updates automatically, always showing your latest Twitter activity.</p>
+                </BentoItem>
+                <BentoItem width={1}>
+                    <h2>Privacy Focused</h2>
+                    <p>We prioritize your data privacy and security, giving you full control over what's displayed.</p>
+                </BentoItem>
+                <BentoItem width={1}>
+                    <h2>Mobile Friendly</h2>
+                    <p>Your contribution graph looks great on all devices, from desktop to mobile.</p>
+                </BentoItem>
+                <BentoItem width={2}>
+                    <h2>Export Options</h2>
+                    <p>Easily export your graph as an image to use in presentations or other social media platforms.</p>
+                </BentoItem>
+            </BentoGrid>
         </div>
     );
 }

@@ -2,29 +2,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
 /* Base colors and default variables */
+
 :root {
   --font-family-base: 'Rubik', sans-serif;
 
   /* Light theme colors */
-  --background-color-light: #ffffff;
-  --text-color-light: #000000;
-  --primary-color-light: #1a73e8; /* Example primary color for light theme */
-  --secondary-color-light: #e9ecef;
-  --background-gradient-light: linear-gradient(180deg, transparent 18em, #fff 30em);
+  --color-light-bg: #ffffff;
+  --color-light-text: #000000;
+  --color-light-primary: #1a73e8; /* Example primary color for light theme */
+  --color-light-secondary: #e9ecef;
+  --gradient-light-bg: linear-gradient(180deg, transparent 18em, #fff 30em);
 
   /* Dark theme colors */
-  --background-color-dark: #082042; /* Updated dark background color */
-  --text-color-dark: #ffffff;
-  --primary-color-dark: #4e8ef7; /* Example primary color for dark theme */
-  --secondary-color-dark: #2a3b4f;
-  --background-gradient-dark: linear-gradient(180deg, transparent 18em, #0D2C5C 30em); /* Dark blue gradient */
+  --color-dark-bg: #082042; /* 082042 Monarch Updated dark background color */
+  --color-dark-text: #ffffff;
+  --color-dark-primary: #4e8ef7; /* Example primary color for dark theme */
+  --color-dark-secondary: #2a3b4f;
+  --gradient-dark-bg: linear-gradient(180deg, transparent 18em, #0D2C5C 30em); /* Dark blue gradient */
 
   /* Set initial default colors */
-  --background-color: var(--background-color-light);
-  --text-color: var(--text-color-light);
-  --primary-color: var(--primary-color-light);
-  --secondary-color: var(--secondary-color-light);
-  --background-gradient: var(--background-gradient-light);
+  --color-bg: var(--color-light-bg);
+  --color-text: var(--color-light-text);
+  --color-primary: var(--color-light-primary);
+  --color-secondary: var(--color-light-secondary);
+  --gradient-bg: var(--gradient-light-bg);
 }
 
 /* Reset and global styles */
@@ -40,28 +41,29 @@ html {
   overflow-y: scroll; /* Always show vertical scrollbar */
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
+
 /* Apply theme-specific colors */
 html[data-theme='light'] {
-  --background-color: var(--background-color-light);
-  --text-color: var(--text-color-light);
-  --primary-color: var(--primary-color-light);
-  --secondary-color: var(--secondary-color-light);
-  --background-gradient: var(--background-gradient-light);
+  --color-bg: var(--color-light-bg);
+  --color-text: var(--color-light-text);
+  --color-primary: var(--color-light-primary);
+  --color-secondary: var(--color-light-secondary);
+  --gradient-bg: var(--gradient-light-bg);
 }
 
 html[data-theme='dark'] {
-  --background-color: var(--background-color-dark);
-  --text-color: var(--text-color-dark);
-  --primary-color: var(--primary-color-dark);
-  --secondary-color: var(--secondary-color-dark);
-  --background-gradient: var(--background-gradient-dark);
+  --color-bg: var(--color-dark-bg);
+  --color-text: var(--color-dark-text);
+  --color-primary: var(--color-dark-primary);
+  --color-secondary: var(--color-dark-secondary);
+  --gradient-bg: var(--gradient-dark-bg);
 }
 
 /* General styles */
 body {
   font-family: var(--font-family-base);
-  color: var(--text-color);
-  background-color: var(--background-color);
+  color: var(--color-text);
+  background-color: var(--color-bg);
   transition: background-color 0.4s, color 0.4s, background 0.4s;
   margin: 0;
   padding: 0;
@@ -69,9 +71,26 @@ body {
   flex-direction: column;
   min-height: 100vh;
   /* Combined gradient and grid lines */
-  //background: var(--background-gradient), url('/grid-cell.svg') 0 0 / auto repeat;
+  //background: var(--gradient-bg), url('/grid-cell.svg') 0 0 / auto repeat;
 }
 
 main {
-  transition: color 0.1s, background-color 0.4s; //Faster Text Transition to Prevent flicker effect
+  transition: color 0.1s, background-color 0.4s; // Faster text transition to prevent flicker effect
+}
+
+/* Override for user preference */
+[data-theme='light'] {
+  --color-bg: var(--color-light-bg);
+  --color-text: var(--color-light-text);
+  --color-primary: var(--color-light-primary);
+  --color-secondary: var(--color-light-secondary);
+  --gradient-bg: var(--gradient-light-bg);
+}
+
+[data-theme='dark'] {
+  --color-bg: var(--color-dark-bg);
+  --color-text: var(--color-dark-text);
+  --color-primary: var(--color-dark-primary);
+  --color-secondary: var(--color-dark-secondary);
+  --gradient-bg: var(--gradient-dark-bg);
 }

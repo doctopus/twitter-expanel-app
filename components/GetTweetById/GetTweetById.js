@@ -1,11 +1,11 @@
-"use client"; // Mark this component as a Client Component
+"use client";
 
 import { useState } from 'react';
-import styles from './fetcherStyles.module.scss';
+import styles from './GetTweetById.module.scss';
 
 const fetchTweetById = async (id) => {
     try {
-        const response = await fetch(`/api/twitter/fetchTweetById?id=${id}`);
+        const response = await fetch(`/api/twitter/getTweetById?id=${id}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -16,13 +16,14 @@ const fetchTweetById = async (id) => {
     }
 };
 
-export default function TweetFetcher() {
+export default function GetTweetById() {
+    const [tweetId, setTweetId] = useState('1802010958828843203'); // Pre-filled tweet ID
     const [tweetData, setTweetData] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const handleFetchTweet = async () => {
+    const handleFetchTweet = async (e) => {
+        e.preventDefault();
         setLoading(true);
-        const tweetId = '1802010958828843203'; // Replace with your actual tweet ID
         const data = await fetchTweetById(tweetId);
         setTweetData(data);
         setLoading(false);
@@ -30,6 +31,18 @@ export default function TweetFetcher() {
 
     return (
         <div className={styles.container}>
+            <form onSubmit={handleFetchTweet} className={styles.form}>
+                <input
+                    type="text"
+                    value={tweetId}
+                    onChange={(e) => setTweetId(e.target.value)}
+                    placeholder="Enter Tweet ID"
+                    className={styles.input}
+                />
+                <button type="submit" className={styles.button} disabled={loading}>
+                    {loading ? 'Loading...' : 'Fetch Tweet'}
+                </button>
+            </form>
             <div className={styles.content}>
                 {loading && <Skeleton />}
                 {!loading && tweetData && (
@@ -42,11 +55,6 @@ export default function TweetFetcher() {
                         <p><strong>Retweets:</strong> {tweetData.retweet_count}</p>
                     </div>
                 )}
-            </div>
-            <div className={styles["button-container"]}>
-                <button className={styles.button} onClick={handleFetchTweet}>
-                    {loading ? 'Loading...' : 'Fetch Tweet'}
-                </button>
             </div>
         </div>
     );

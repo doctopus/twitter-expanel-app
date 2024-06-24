@@ -1,7 +1,6 @@
-// components/footer/Footer.js
 "use client";
 import React, { useContext } from 'react';
-import ThemeContext from '../../context/ThemeContext';
+import ThemeContext from '../../lib/context/ThemeContext';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
@@ -10,7 +9,28 @@ const Footer = () => {
 
     return (
         <footer className={`${styles['site-footer']} ${themeClass}`}>
-            <p>&copy; 2024 Expanela. All rights reserved.</p>
+            <div className={styles['footer-content']}>
+                <div className={styles['footer-section']}>
+                    <h3>About Expanela</h3>
+                    <p>Theme Your 𝕏</p>
+                </div>
+                <div className={styles['footer-section']}>
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div className={styles['footer-section']}>
+                    <h3>Follow Us</h3>
+                    <ul className={styles['social-links']}>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                    <p>&copy; {new Date().getFullYear()} Expanela</p>
+                </div>
+            </div>
         </footer>
     );
 };

@@ -1,0 +1,59 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+/* Base colors and default variables */
+
+:root {
+  --font-family-base: 'Rubik', sans-serif;
+
+  /* Light theme colors */
+  --color-light-bg: #ffffff;
+  --color-light-text: #000000;
+  --color-light-primary: #1a73e8;
+  --color-light-secondary: #e9ecef;
+  --gradient-light-bg: linear-gradient(180deg, transparent 18em, #fff 30em);
+
+  /* Dark theme colors */
+  --color-dark-bg: #082042;
+  --color-dark-text: #ffffff;
+  --color-dark-primary: #4e8ef7;
+  --color-dark-secondary: #2a3b4f;
+  --gradient-dark-bg: linear-gradient(180deg, transparent 18em, #0D2C5C 30em);
+}
+
+/* Light theme */
+:root {
+  --color-bg: var(--color-light-bg);
+  --color-text: var(--color-light-text);
+  --color-primary: var(--color-light-primary);
+  --color-secondary: var(--color-light-secondary);
+  --gradient-bg: var(--gradient-light-bg);
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: var(--color-dark-bg);
+    --color-text: var(--color-dark-text);
+    --color-primary: var(--color-dark-primary);
+    --color-secondary: var(--color-dark-secondary);
+    --gradient-bg: var(--gradient-dark-bg);
+  }
+}
+
+/* Override for user preference */
+[data-theme='light'] {
+  --color-bg: var(--color-light-bg);
+  --color-text: var(--color-light-text);
+  --color-primary: var(--color-light-primary);
+  --color-secondary: var(--color-light-secondary);
+  --gradient-bg: var(--gradient-light-bg);
+}
+
+[data-theme='dark'] {
+  --color-bg: var(--color-dark-bg);
+  --color-text: var(--color-dark-text);
+  --color-primary: var(--color-dark-primary);
+  --color-secondary: var(--color-dark-secondary);
+  --gradient-bg: var(--gradient-dark-bg);
+}

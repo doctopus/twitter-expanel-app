@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default async function handler(req, res) {
     const { id } = req.query;
-    const apiKey = process.env.SocialData_API_TOKEN;
+    const apiKey = process.env.SOCIALDATA_API_KEY;
 
     if (!id) {
         return res.status(400).json({ error: 'Tweet ID is required' });

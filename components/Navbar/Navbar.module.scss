@@ -26,12 +26,12 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   justify-content: center;
   align-items: center;
   transition: background-color 0.3s, color 0.3s;
-  position: fixed; /* Fix the navbar at the top */
+  position: fixed; /* Fix the Navbar at the top */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* Ensure the navbar stays on top of other content */
-  box-shadow: 0 4px 6px $shadow-color; /* Add shadow below the navbar */
+  z-index: 1000; /* Ensure the Navbar stays on top of other content */
+  box-shadow: 0 4px 6px $shadow-color; /* Add shadow below the Navbar */
 }
 
 .nav-container {

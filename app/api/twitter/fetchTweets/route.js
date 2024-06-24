@@ -1,12 +1,14 @@
-// pages/api/twitter/fetchTweets.js
 import axios from 'axios';
+import { NextResponse } from 'next/server';
 
-export default async function handler(req, res) {
-    const { query, within_time } = req.query; // Extract query parameters
-    const apiKey = process.env.SocialData_API_TOKEN;
+export async function GET(request) {
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get('query');
+    const within_time = searchParams.get('within_time');
+    const apiKey = process.env.SOCIALDATA_API_KEY;
 
     if (!query) {
-        return res.status(400).json({ error: 'Query parameter is required' });
+        return NextResponse.json({ error: 'Query parameter is required' }, { status: 400 });
     }
 
     try {
@@ -30,9 +32,12 @@ export default async function handler(req, res) {
             full_text: tweet.full_text,
         }));
 
-        res.status(200).json(tweets);
+        return NextResponse.json(tweets);
     } catch (error) {
         console.error('Error fetching tweets:', error.response ? error.response.data : error.message);
-        res.status(500).json({ error: 'Error fetching tweets', details: error.response ? error.response.data : error.message });
+        return NextResponse.json(
+            { error: 'Error fetching tweets', details: error.response ? error.response.data : error.message },
+            { status: 500 }
+        );
     }
 }
