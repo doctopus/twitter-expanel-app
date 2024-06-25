@@ -1,0 +1,14 @@
+// components/ProfileImage.module.scss
+.profileImage {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover; // This ensures the image covers the area without stretching
+}
+
+.profileImageLarge {
+  width: 150px; /* Example: Larger size */
+  height: 150px; /* Example: Larger size */
+  border-radius: 50%;
+  /* Add other styles as needed */
+}

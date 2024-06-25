@@ -1,14 +1,17 @@
 // components/ProfileImage.js
-import React, { useEffect } from 'react';
-const ProfileImage = ({ imageUrl, alt }) => {
-    useEffect(() => {
-        // Add useEffect logic here if needed
-    }, []);
+import React from 'react';
+import styles from './ProfileImage.module.scss';
+
+const ProfileImage = ({ imageUrl, alt, size }) => {
+    if (!imageUrl) return null; // Return null if no image URL is provided
+
+    const imageSizeClass = size === 'large' ? styles.profileImageLarge : styles.profileImage;
+
     return (
         <img
             src={imageUrl}
-            alt={alt}
-            style={{ borderRadius: '50%', width: '50px', height: '50px' }} // Example styling
+            alt={alt || 'Profile'}
+            className={imageSizeClass}
         />
     );
 };

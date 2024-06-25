@@ -4,19 +4,16 @@ import React, { useContext } from 'react';
 import ThemeContext from '../../lib/context/ThemeContext';
 import { ThemeToggle } from '../theme-toggle';
 import AuthButtons from '../auth-buttons/auth-buttons';
-import profileImage from "../profile-image/ProfileImage";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import ProfileImage from "../profile-image/ProfileImage";
 import { useSession } from "next-auth/react";
 
 const Navbar = () => {
-    const { data: session } = useSession();
-    // console.log('Profile:', profile);
+    const { data: session, status } = useSession();
     const { theme, toggleTheme } = useContext(ThemeContext);
     const themeClass = theme === 'dark' ? styles['theme-dark'] : styles['theme-light'];
 
-    // const imageUrl = profile?.image || '/default-profile-image.png'; // Provide a default image URL
     return (
         <nav className={themeClass}>
             <header className={styles["site-header"]}>
@@ -31,7 +28,9 @@ const Navbar = () => {
                         XProfile
                     </Link>
                     <AuthButtons />
-                    {session && <ProfileImage imageUrl={session.user.image} />}
+                    {status === 'authenticated' && session?.user?.image && (
+                        <ProfileImage imageUrl={session.user.image} alt={session.user.name} />
+                    )}
                     <ThemeToggle mode={theme} toggleMode={toggleTheme} />
                 </div>
             </header>

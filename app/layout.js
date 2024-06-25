@@ -3,7 +3,7 @@ import { ThemeProvider } from '../lib/context/ThemeContext';
 import './globals.scss';
 import styles from './layout.module.scss';
 import Navbar from '../components/Navbar/Navbar';
-import Footer from "../components/footer/Footer";
+import Footer from "../components/Footer/Footer";
 
 export default function RootLayout({ children }) {
     return (

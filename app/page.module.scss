@@ -41,39 +41,3 @@
         font-size: 1rem;
     }
 }
-/*
-// Light theme styles
-:root[data-theme='light'] {
-    .bentoItem {
-        background: linear-gradient(135deg, var(--secondary-color-light) 0%, var(--background-color-light) 100%);
-        border-color: var(--secondary-color-light);
-        color: var(--text-color-light);
-
-        h2 {
-            color: var(--primary-color-light);
-        }
-
-        p {
-            color: var(--text-color-light);
-        }
-    }
-}
-
-// Dark theme styles
-:root[data-theme='dark'] {
-    .bentoItem {
-        background: linear-gradient(135deg, var(--secondary-color-dark) 0%, var(--background-color-dark) 100%);
-        border-color: var(--secondary-color-dark);
-        color: var(--text-color-dark);
-
-        h2 {
-            color: var(--primary-color-dark);
-        }
-
-        p {
-            color: var(--text-color-dark);
-        }
-    }
-}
-
- */
