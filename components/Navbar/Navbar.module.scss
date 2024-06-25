@@ -52,7 +52,7 @@ $shadow-color: rgba(0, 0, 0, 0.1);
 
   &:hover {
     color: $hover-color;
-    text-decoration: underline; /* Add underline on hover */
+    text-decoration: none; /* Add underline on hover */
   }
 }
 

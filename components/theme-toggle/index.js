@@ -1,2 +1,2 @@
 export { ThemeToggle } from './themeToggle';
-export { getColorPreference } from './getColorPreference';
+export { getColorPreference } from './context/getColorPreference';

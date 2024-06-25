@@ -2,26 +2,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-/* Base colors and default variables */
 
+/* Root variables */
 :root {
   --font-family-base: 'Inter', sans-serif;
 
   /* Light theme colors */
   --color-light-bg: #ffffff;
   --color-light-text: #000000;
-  --color-light-primary: #1a73e8; /* Example primary color for light theme */
+  --color-light-primary: #1a73e8;
   --color-light-secondary: #e9ecef;
   --gradient-light-bg: linear-gradient(180deg, transparent 18em, #fff 30em);
 
   /* Dark theme colors */
-  --color-dark-bg: #082042; /* 082042 Monarch Updated dark background color */
+  --color-dark-bg: #082042;
   --color-dark-text: #ffffff;
-  --color-dark-primary: #4e8ef7; /* Example primary color for dark theme */
+  --color-dark-primary: #4e8ef7;
   --color-dark-secondary: #2a3b4f;
-  --gradient-dark-bg: linear-gradient(180deg, transparent 18em, #0D2C5C 30em); /* Dark blue gradient */
+  --gradient-dark-bg: linear-gradient(180deg, transparent 18em, #0D2C5C 30em);
 
-  /* Set initial default colors */
+  /* Default colors */
   --color-bg: var(--color-light-bg);
   --color-text: var(--color-light-text);
   --color-primary: var(--color-light-primary);
@@ -31,19 +31,35 @@
 
 /* Reset and global styles */
 * {
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 /* HTML and Body settings */
 html {
-  scrollbar-gutter: stable; /* Always reserve space for scrollbar */
-  overflow-y: scroll; /* Always show vertical scrollbar */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-/* Apply theme-specific colors */
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: background-color 0.4s, color 0.4s, background 0.4s, background-image 0.4s;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  transition: color 0.1s, background-color 0.4s;
+}
+
+/* Theme-specific styles */
 html[data-theme='light'] {
   --color-bg: var(--color-light-bg);
   --color-text: var(--color-light-text);
@@ -60,38 +76,75 @@ html[data-theme='dark'] {
   --gradient-bg: var(--gradient-dark-bg);
 }
 
-/* General styles */
-body {
-  font-family: var(--font-family-base);
+/* Media query for dark mode preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: var(--color-dark-bg);
+    --color-text: var(--color-dark-text);
+    --color-primary: var(--color-dark-primary);
+    --color-secondary: var(--color-dark-secondary);
+    --gradient-bg: var(--gradient-dark-bg);
+  }
+}
+
+/* Basic element styles */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
   color: var(--color-text);
+  margin-bottom: 0.5em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* Form elements */
+input, textarea, select {
   background-color: var(--color-bg);
-  transition: background-color 0.4s, color 0.4s, background 0.4s;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  /* Combined gradient and grid lines */
-  //background: var(--gradient-bg), url('/grid-cell.svg') 0 0 / auto repeat;
+  color: var(--color-text);
+  border: 1px solid var(--color-secondary);
+  padding: 0.5em;
+  border-radius: 4px;
 }
 
-main {
-  transition: color 0.1s, background-color 0.4s; // Faster text transition to prevent flicker effect
+button {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
-/* Override for user preference */
-[data-theme='light'] {
-  --color-bg: var(--color-light-bg);
-  --color-text: var(--color-light-text);
-  --color-primary: var(--color-light-primary);
-  --color-secondary: var(--color-light-secondary);
-  --gradient-bg: var(--gradient-light-bg);
+/* Utility classes */
+.text-primary {
+  color: var(--color-primary);
 }
 
-[data-theme='dark'] {
-  --color-bg: var(--color-dark-bg);
-  --color-text: var(--color-dark-text);
-  --color-primary: var(--color-dark-primary);
-  --color-secondary: var(--color-dark-secondary);
-  --gradient-bg: var(--gradient-dark-bg);
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+  color: #f9f9ff;
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
 }

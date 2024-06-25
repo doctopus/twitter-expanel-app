@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useSession, signIn } from 'next-auth/react';
-import { getUserProfile } from '../../lib/api';
+import { getUserProfile } from '../../app/api/twitter/twitterClient';
 import styles from './TwitterData.module.scss';
 
 export default function TwitterData() {

@@ -1,7 +1,7 @@
 // components/Navbar.js
 "use client";
 import React, { useContext } from 'react';
-import ThemeContext from '../../lib/context/ThemeContext';
+import ThemeContext from '../theme-toggle/context/ThemeContext';
 import { ThemeToggle } from '../theme-toggle';
 import AuthButtons from '../auth-buttons/auth-buttons';
 import Link from "next/link";

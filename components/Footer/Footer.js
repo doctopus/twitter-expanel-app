@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext } from 'react';
-import ThemeContext from '../../lib/context/ThemeContext';
+import ThemeContext from '../theme-toggle/context/ThemeContext';
 import styles from './Footer.module.scss';
 
 const Footer = () => {

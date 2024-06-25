@@ -1,5 +1,5 @@
 import SessionProviderWrapper from './providers/SessionProviderWrapper';
-import { ThemeProvider } from '../lib/context/ThemeContext';
+import { ThemeProvider } from '../components/theme-toggle/context/ThemeContext';
 import './globals.scss';
 import styles from './layout.module.scss';
 import Navbar from '../components/Navbar/Navbar';
