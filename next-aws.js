@@ -1,3 +1,4 @@
+//Implements npm install cdk-nextjs-standalone for AWS deployment
 const { CdkNextjsStandaloneStack } = require('cdk-nextjs-standalone');
 const { App, Stack, StackProps } = require('aws-cdk-lib');
 
