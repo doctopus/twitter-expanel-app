@@ -1,7 +1,7 @@
 // components/theme-toggle/ThemeToggle.js
 import React, {useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
-import styles from './ThemeToggle.module.scss';
+import styles from './themeToggle.module.scss';
 
 export const defaultProperties = {
   dark: {

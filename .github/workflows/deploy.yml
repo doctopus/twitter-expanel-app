@@ -22,8 +22,8 @@ jobs:
 
       - name: Write .env.local file
         run: |
-          echo "${{ secrets.ENV_LOCAL }}" > ./.env.local.tmp
-          mv ./.env.local.tmp ./.env.local
+          echo "${{ secrets.ENV_LOCAL }}" > ./.env.local
+#          mv ./.env.local.tmp ./.env.local
 
       - name: Set NEXTAUTH_URL
         run: |
