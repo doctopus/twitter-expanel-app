@@ -1,23 +1,20 @@
-//Implements npm install cdk-nextjs-standalone for AWS deployment
-const { CdkNextjsStandaloneStack } = require('cdk-nextjs-standalone');
-const { App, Stack, StackProps } = require('aws-cdk-lib');
+const { App, Stack } = require('aws-cdk-lib');
+const { Nextjs } = require('cdk-nextjs-standalone');
 
 class NextStack extends Stack {
     constructor(scope, id, props) {
         super(scope, id, props);
 
-        new CdkNextjsStandaloneStack(this, 'NextjsApp', {
-            // Specify the entry point for your Next.js application
+        const nextjs = new Nextjs(this, 'Nextjs', {
             entry: '.',
-            // Specify the environment variables for your application
             environment: {
-                // Add any necessary environment variables here
+                // Add your environment variables here
+                NEXTAUTH_URL: 'https://example.com',
             },
-            // Specify the domain for your application (optional)
-            domain: {
-                // domainName: 'example.com',
-                // domainUrl: 'https://example.com',
-            },
+        });
+
+        new this.CfnOutput(this, 'CloudFrontDistributionDomain', {
+            value: nextjs.distribution.distributionDomain,
         });
     }
 }
