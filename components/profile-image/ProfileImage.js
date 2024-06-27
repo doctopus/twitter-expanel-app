@@ -1,5 +1,6 @@
 // components/ProfileImage.js
 import React from 'react';
+import Image from 'next/image';
 import styles from './ProfileImage.module.scss';
 
 const ProfileImage = ({ imageUrl, alt, size }) => {
@@ -8,7 +9,7 @@ const ProfileImage = ({ imageUrl, alt, size }) => {
     const imageSizeClass = size === 'large' ? styles.profileImageLarge : styles.profileImage;
 
     return (
-        <img
+        <Image
             src={imageUrl}
             alt={alt || 'Profile'}
             className={imageSizeClass}

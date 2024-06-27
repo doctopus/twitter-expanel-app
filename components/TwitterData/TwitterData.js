@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { useSession, signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { getUserProfile } from '../../app/api/twitter/twitterClient';
 import styles from './TwitterData.module.scss';
 
@@ -10,25 +10,25 @@ export default function TwitterData() {
     const [error, setError] = useState(null);
     const [fetchingData, setFetchingData] = useState(false);
 
-    useEffect(() => {
-        // Only fetch data when fetchingData is true
-        if (fetchingData && status === 'authenticated' && session?.accessToken) {
-            fetchData();
-        }
-    }, [fetchingData, status, session]);
-
-    async function fetchData() {
+    const fetchData = useCallback(async () => {
         try {
             console.log('Fetching user profile...');
             const profile = await getUserProfile(session.accessToken);
             console.log('User profile:', profile);
             setUserProfile(profile);
-            setFetchingData(false);  // Reset fetching state after successful fetch
+            setFetchingData(false); // Reset fetching state after successful fetch
         } catch (err) {
             console.error('Error fetching data:', err);
             setError('Error fetching data from Twitter');
         }
-    }
+    }, [session]);
+
+    useEffect(() => {
+        // Only fetch data when fetchingData is true
+        if (fetchingData && status === 'authenticated' && session?.accessToken) {
+            fetchData();
+        }
+    }, [fetchingData, status, session, fetchData]);
 
     function handleFetchClick() {
         setFetchingData(true);  // Set fetching state to true to trigger fetch

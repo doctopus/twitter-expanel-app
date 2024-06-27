@@ -6,6 +6,7 @@ import UpdateBanner from '../../components/UpdateBanner/UpdateBanner';
 import UpdateUserBanner from "../../components/UpdateUserBanner/UpdateUserBanner";
 import UpdateUserImage from "../../components/UpdateUserImage/UpdateUserImage";
 import UpdateUserProfile from '../../components/UpdateUserProfile/UpdateUserProfile';
+import Image from 'next/image';
 import './styles.css';
 
 
@@ -41,7 +42,7 @@ export default function XProfile() {
             <p>Update your 𝕏 profile banner image and information</p>
 
             <div className="banner-frame">
-                <img src={imagePath} alt="Profile Banner" className="banner-image"/>
+                <Image src={imagePath} alt="Profile Banner" className="banner-image"/>
             </div>
 
             <div className="button-container">
@@ -71,7 +72,7 @@ export default function XProfile() {
             {/* Add the UpdateUserImage component */}
             <div className="profile-container">
                 <div className="banner-frame">
-                    <img src={userImagePath} alt="User Image" className="banner-image"/>
+                    <Image src={userImagePath} alt="User Image" className="banner-image"/>
                 </div>
                 <div className="button-container">
                     <button className="button" onClick={() => setUserImagePath('/images/profile-image-giraffe.jpg')}>
