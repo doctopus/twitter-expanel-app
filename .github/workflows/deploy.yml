@@ -1,0 +1,44 @@
+name: Deploy to AWS Lambda
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Write .env.local file
+        run: |
+          echo "${{ secrets.ENV_LOCAL }}" > .env.local
+
+      - name: Set NEXTAUTH_URL
+        run: |
+          echo "NEXTAUTH_URL=https://example.com" >> $GITHUB_OUTPUT
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm install cdk-nextjs-standalone
+
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          NEXTAUTH_URL: ${{ env.NEXTAUTH_URL }}
+
+      - name: Deploy to AWS Lambda
+        run: |
+          npx cdk deploy --require-approval never --app-entry ./cdk-nextjs-standalone.js
+        env:
+          NEXTAUTH_URL: ${{ env.NEXTAUTH_URL }}
