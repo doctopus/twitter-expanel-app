@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { getUserProfile } from '../../app/api/twitter/twitterClient';
 import styles from './TwitterData.module.scss';
@@ -31,7 +31,7 @@ export default function TwitterData() {
     }, [fetchingData, status, session, fetchData]);
 
     function handleFetchClick() {
-        setFetchingData(true);  // Set fetching state to true to trigger fetch
+        setFetchingData(true); // Set fetching state to true to trigger fetch
     }
 
     if (status === 'loading') return <div className={styles.loadingContainer}><p>Loading...</p></div>;
@@ -40,7 +40,7 @@ export default function TwitterData() {
     return (
         <div className={styles.twitterData}>
             <h2>Twitter Data</h2>
-            {userProfile && userProfile.data && (  // Ensure userProfile.data exists before accessing its properties
+            {userProfile && userProfile.data && ( // Ensure userProfile.data exists before accessing its properties
                 <div className={styles.userProfile}>
                     <h3>User Profile</h3>
                     <div className={styles.profileInfo}>
