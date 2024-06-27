@@ -33,7 +33,7 @@ export default function Home() {
                 </BentoItem>
                 <BentoItem width={1} height={1}>
                     <h2>Privacy Focused</h2>
-                    <p>We prioritize your data privacy and security, giving you full control over what's displayed.</p>
+                    <p>We prioritize your data privacy and security, giving you full control over what is displayed.</p>
                 </BentoItem>
                 <BentoItem width={3} height={1}>
                     <h2>Mobile Friendly</h2>
