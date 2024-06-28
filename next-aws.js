@@ -1,6 +1,7 @@
 const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3 } = require('aws-cdk-lib');
 const { RemovalPolicy } = require('aws-cdk-lib');
 const { join } = require('path');
+const { S3Origin } = require('@aws-cdk/aws-cloudfront-origins');
 
 class NextStack extends Stack {
     constructor(scope, id, props) {
@@ -34,7 +35,7 @@ class NextStack extends Stack {
 
         new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
             defaultBehavior: {
-                origin: new aws_cloudfront.S3Origin(assetsBucket),
+                origin: new S3Origin(assetsBucket),
                 // Add any other CloudFront behaviors as needed
             },
         });
