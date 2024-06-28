@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "aws-cdk-lib": "^2.147.1",
     "axios": "^1.7.2",
-    "cdk-nextjs-standalone": "^4.0.0-beta.30",
     "next": "^14.2.4",
     "next-auth": "^4.24.7",
     "react": "^18.3.1",

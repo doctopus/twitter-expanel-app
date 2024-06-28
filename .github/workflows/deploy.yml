@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          npm install cdk-nextjs-standalone
+          npm install aws-cdk-lib
 
       - name: Build Next.js app
         run: npm run build
@@ -42,7 +42,7 @@ jobs:
 
       - name: Deploy to AWS Lambda
         run: |
-          npx cdk deploy --require-approval never --app ./next-aws.js
+          npx aws-cdk deploy --require-approval never --app ./next-aws.js
         env:
           NEXTAUTH_URL: ${{ env.NEXTAUTH_URL }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

@@ -1,20 +1,44 @@
-const { App, Stack } = require('aws-cdk-lib');
-const { Nextjs } = require('cdk-nextjs-standalone');
+const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3 } = require('aws-cdk-lib');
+const { join } = require('path');
 
 class NextStack extends Stack {
     constructor(scope, id, props) {
         super(scope, id, props);
 
-        const nextjs = new Nextjs(this, 'Nextjs', {
-            entry: '.', // Specify the relative path to your Next.js application
+        // Create the Lambda function for your Next.js application
+        const nextLambda = new aws_lambda.Function(this, 'NextLambda', {
+            runtime: aws_lambda.Runtime.NODEJS_16_X,
+            code: aws_lambda.Code.fromAsset(join(__dirname, 'app')),
+            handler: 'server.handler',
             environment: {
-                // Add your environment variables here
                 NEXTAUTH_URL: 'https://example.com',
+                // Add any other environment variables here
             },
         });
 
+        // Create the API Gateway to expose the Lambda function
+        const api = new aws_apigateway.RestApi(this, 'NextAPI', {
+            restApiName: 'Next.js API',
+        });
+
+        api.root.addMethod('ANY', new aws_apigateway.LambdaIntegration(nextLambda));
+
+        // Create the S3 bucket and CloudFront distribution for static assets
+        const assetsBucket = new aws_s3.Bucket(this, 'NextjsAssets', {
+            bucketName: 'my-nextjs-assets',
+            removalPolicy: aws_cdk.RemovalPolicy.DESTROY,
+        });
+
+        const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
+            defaultBehavior: {
+                origin: new aws_cloudfront.S3Origin(assetsBucket),
+                // Add any other CloudFront behaviors as needed
+            },
+        });
+
+        // Output the CloudFront distribution domain
         new this.CfnOutput(this, 'CloudFrontDistributionDomain', {
-            value: nextjs.distribution.distributionDomain,
+            value: distribution.distributionDomain,
         });
     }
 }
