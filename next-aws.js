@@ -1,4 +1,5 @@
-const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3, aws_cdk } = require('aws-cdk-lib');
+const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3 } = require('aws-cdk-lib');
+const { RemovalPolicy } = require('aws-cdk-lib');
 const { join } = require('path');
 
 class NextStack extends Stack {
@@ -7,7 +8,7 @@ class NextStack extends Stack {
 
         // Create the Lambda function for your Next.js application
         const nextLambda = new aws_lambda.Function(this, 'NextLambda', {
-            runtime: aws_lambda.Runtime.NODEJS_16_X,
+            runtime: aws_lambda.Runtime.NODEJS_20_X,
             code: aws_lambda.Code.fromAsset(join(__dirname, 'app')),
             handler: 'server.handler',
             environment: {
@@ -26,7 +27,7 @@ class NextStack extends Stack {
         // Create the S3 bucket and CloudFront distribution for static assets
         const assetsBucket = new aws_s3.Bucket(this, 'NextjsAssets', {
             bucketName: 'my-nextjs-assets',
-            removalPolicy: aws_cdk.RemovalPolicy.DESTROY,
+            removalPolicy: RemovalPolicy.DESTROY,
         });
 
         const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
