@@ -1,5 +1,4 @@
-const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3, CfnOutput } = require('aws-cdk-lib');
-const { RemovalPolicy } = require('aws-cdk-lib');
+const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3, CfnOutput, RemovalPolicy } = require('aws-cdk-lib');
 const { join } = require('path');
 const { S3Origin } = require('@aws-cdk/aws-cloudfront-origins');
 
@@ -27,9 +26,9 @@ class NextStack extends Stack {
 
         // Create the S3 bucket and CloudFront distribution for static assets
         const assetsBucket = new aws_s3.Bucket(this, 'NextjsAssets', {
-            bucketName: 'my-nextjs-assets',
             removalPolicy: RemovalPolicy.DESTROY,
-            // Next.js will automatically handle the static assets
+            websiteIndexDocument: 'index.html',
+            websiteErrorDocument: 'error.html',
         });
 
         const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
