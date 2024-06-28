@@ -1,4 +1,4 @@
-const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3 } = require('aws-cdk-lib');
+const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3, aws_cdk } = require('aws-cdk-lib');
 const { join } = require('path');
 
 class NextStack extends Stack {
