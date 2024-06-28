@@ -49,10 +49,8 @@ class NextStack extends Stack {
     constructor(scope, id, props) {
         super(scope, id, props);
 
-        const nextAuthUrl = 'https://example.com';
-
         const nextLambda = new NextLambdaFunction(this, 'NextLambda', {
-            nextAuthUrl,
+            nextAuthUrl: props.nextAuthUrl,
         });
 
         const nextApi = new NextApiGateway(this, 'NextAPI', {
@@ -73,5 +71,5 @@ class NextStack extends Stack {
 
 const app = new App();
 new NextStack(app, 'NextStack', {
-    // Add any necessary stack properties here
+    nextAuthUrl: process.env.NEXTAUTH_URL,
 });

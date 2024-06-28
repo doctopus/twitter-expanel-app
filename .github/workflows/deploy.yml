@@ -66,6 +66,7 @@ jobs:
       - name: Write .env.local file
         run: |
           echo "${{ secrets.ENV_LOCAL }}" > .env.local
+          echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env.local
 
       - name: Deploy to AWS Lambda
         run: |
