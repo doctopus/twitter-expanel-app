@@ -26,7 +26,7 @@ class NextStack extends Stack {
         // Create the S3 bucket and CloudFront distribution for static assets
         const assetsBucket = new aws_s3.Bucket(this, 'NextjsAssets', {
             bucketName: 'my-nextjs-assets',
-            removalPolicy: RemovalPolicy.DESTROY,
+            removalPolicy: aws_cdk.RemovalPolicy.DESTROY,
         });
 
         const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
