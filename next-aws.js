@@ -1,4 +1,4 @@
-const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3 } = require('aws-cdk-lib');
+const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3, CfnOutput } = require('aws-cdk-lib');
 const { RemovalPolicy } = require('aws-cdk-lib');
 const { join } = require('path');
 const { S3Origin } = require('@aws-cdk/aws-cloudfront-origins');
@@ -29,11 +29,10 @@ class NextStack extends Stack {
         const assetsBucket = new aws_s3.Bucket(this, 'NextjsAssets', {
             bucketName: 'my-nextjs-assets',
             removalPolicy: RemovalPolicy.DESTROY,
-            websiteIndexDocument: 'index.html',
-            websiteErrorDocument: 'error.html',
+            // Next.js will automatically handle the static assets
         });
 
-        new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
+        const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
             defaultBehavior: {
                 origin: new S3Origin(assetsBucket),
                 // Add any other CloudFront behaviors as needed
@@ -41,8 +40,8 @@ class NextStack extends Stack {
         });
 
         // Output the CloudFront distribution domain
-        new this.CfnOutput(this, 'CloudFrontDistributionDomain', {
-            value: this.getOutput('NextjsDistribution.Distribution.DomainName'),
+        new CfnOutput(this, 'CloudFrontDistributionDomain', {
+            value: distribution.distributionDomainName,
         });
     }
 }
