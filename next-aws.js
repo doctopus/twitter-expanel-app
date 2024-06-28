@@ -28,11 +28,13 @@ class NextStack extends Stack {
         const assetsBucket = new aws_s3.Bucket(this, 'NextjsAssets', {
             bucketName: 'my-nextjs-assets',
             removalPolicy: RemovalPolicy.DESTROY,
+            websiteIndexDocument: 'index.html',
+            websiteErrorDocument: 'error.html',
         });
 
         const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
             defaultBehavior: {
-                origin: new aws_cloudfront.sources.S3Origin(assetsBucket),
+                origin: new aws_cloudfront.BucketWebsiteConfiguration(assetsBucket),
                 // Add any other CloudFront behaviors as needed
             },
         });
