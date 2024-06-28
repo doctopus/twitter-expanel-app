@@ -6,7 +6,7 @@ class NextStack extends Stack {
         super(scope, id, props);
 
         const nextjs = new Nextjs(this, 'Nextjs', {
-            entry: '.',
+            entry: './app', // Specify the relative path to your Next.js application
             environment: {
                 // Add your environment variables here
                 NEXTAUTH_URL: 'https://example.com',
