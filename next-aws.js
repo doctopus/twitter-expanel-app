@@ -32,19 +32,16 @@ class NextStack extends Stack {
             websiteErrorDocument: 'error.html',
         });
 
-        const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
+        new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
             defaultBehavior: {
-                origin: new aws_cloudfront.OriginConfiguration({
-                    originDomainName: assetsBucket.bucketRegionalDomainName,
-                    originId: 'NextjsBucket',
-                }),
+                origin: new aws_cloudfront.S3Origin(assetsBucket),
                 // Add any other CloudFront behaviors as needed
             },
         });
 
         // Output the CloudFront distribution domain
         new this.CfnOutput(this, 'CloudFrontDistributionDomain', {
-            value: distribution.distributionDomain,
+            value: this.getOutput('NextjsDistribution.Distribution.DomainName'),
         });
     }
 }
