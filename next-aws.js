@@ -8,7 +8,7 @@ class NextStack extends Stack {
 
         // Create the Lambda function for your Next.js application
         const nextLambda = new aws_lambda.Function(this, 'NextLambda', {
-            runtime: aws_lambda.Runtime.NODEJS_20_X,
+            runtime: aws_lambda.Runtime.NODEJS_18_X,
             code: aws_lambda.Code.fromAsset(join(__dirname, 'app')),
             handler: 'server.handler',
             environment: {
@@ -32,7 +32,7 @@ class NextStack extends Stack {
 
         const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
             defaultBehavior: {
-                origin: new aws_cloudfront.BucketOrigin(assetsBucket),
+                origin: new aws_cloudfront.sources.S3Origin(assetsBucket),
                 // Add any other CloudFront behaviors as needed
             },
         });
