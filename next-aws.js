@@ -32,7 +32,7 @@ class NextStack extends Stack {
 
         const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
             defaultBehavior: {
-                origin: new aws_cloudfront.origins.S3Origin(assetsBucket),
+                origin: new aws_cloudfront.BucketOrigin(assetsBucket),
                 // Add any other CloudFront behaviors as needed
             },
         });
