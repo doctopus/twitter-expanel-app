@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,20 +16,13 @@ jobs:
       - name: Print Node.js version
         run: node --version
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: Set NEXTAUTH_URL
-        run: |
-          echo "NEXTAUTH_URL=https://example.com" >> $GITHUB_ENV
-
-      - name: Write .env.local file
-        run: |
-          echo "${{ secrets.ENV_LOCAL }}" > .env.local
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
 
       - name: Install dependencies
         run: |
@@ -39,16 +32,46 @@ jobs:
       - name: Build Next.js app
         run: npm run build
         env:
-          NEXTAUTH_URL: ${{ env.NEXTAUTH_URL }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: next-app
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: next-app
+          path: .
+
+      - name: Write .env.local file
+        run: |
+          echo "${{ secrets.ENV_LOCAL }}" > .env.local
 
       - name: Deploy to AWS Lambda
         run: |
           npx aws-cdk deploy --require-approval never --app ./next-aws.js
         env:
-          NEXTAUTH_URL: ${{ env.NEXTAUTH_URL }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}

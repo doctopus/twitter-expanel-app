@@ -2,43 +2,69 @@ const { App, Stack, aws_lambda, aws_apigateway, aws_cloudfront, aws_s3, CfnOutpu
 const { join } = require('path');
 const { S3Origin } = require('@aws-cdk/aws-cloudfront-origins');
 
-class NextStack extends Stack {
+class NextLambdaFunction extends aws_lambda.Function {
     constructor(scope, id, props) {
-        super(scope, id, props);
-
-        // Create the Lambda function for your Next.js application
-        const nextLambda = new aws_lambda.Function(this, 'NextLambda', {
+        super(scope, id, {
             runtime: aws_lambda.Runtime.NODEJS_18_X,
             code: aws_lambda.Code.fromAsset(join(__dirname, 'app')),
             handler: 'server.handler',
             environment: {
-                NEXTAUTH_URL: 'https://example.com',
-                // Add any other environment variables here
+                NEXTAUTH_URL: props.nextAuthUrl,
             },
         });
+    }
+}
 
-        // Create the API Gateway to expose the Lambda function
-        const api = new aws_apigateway.RestApi(this, 'NextAPI', {
+class NextApiGateway extends aws_apigateway.RestApi {
+    constructor(scope, id, props) {
+        super(scope, id, {
             restApiName: 'Next.js API',
         });
 
-        api.root.addMethod('ANY', new aws_apigateway.LambdaIntegration(nextLambda));
+        this.root.addMethod('ANY', new aws_apigateway.LambdaIntegration(props.nextLambda));
+    }
+}
 
-        // Create the S3 bucket and CloudFront distribution for static assets
-        const assetsBucket = new aws_s3.Bucket(this, 'NextjsAssets', {
+class NextStaticAssets extends aws_s3.Bucket {
+    constructor(scope, id, props) {
+        super(scope, id, {
             removalPolicy: RemovalPolicy.DESTROY,
             websiteIndexDocument: 'index.html',
             websiteErrorDocument: 'error.html',
         });
+    }
+}
 
-        const distribution = new aws_cloudfront.Distribution(this, 'NextjsDistribution', {
+class NextCloudFrontDistribution extends aws_cloudfront.Distribution {
+    constructor(scope, id, props) {
+        super(scope, id, {
             defaultBehavior: {
-                origin: new S3Origin(assetsBucket),
-                // Add any other CloudFront behaviors as needed
+                origin: new S3Origin(props.assetsBucket),
             },
         });
+    }
+}
 
-        // Output the CloudFront distribution domain
+class NextStack extends Stack {
+    constructor(scope, id, props) {
+        super(scope, id, props);
+
+        const nextAuthUrl = 'https://example.com';
+
+        const nextLambda = new NextLambdaFunction(this, 'NextLambda', {
+            nextAuthUrl,
+        });
+
+        const nextApi = new NextApiGateway(this, 'NextAPI', {
+            nextLambda,
+        });
+
+        const assetsBucket = new NextStaticAssets(this, 'NextjsAssets');
+
+        const distribution = new NextCloudFrontDistribution(this, 'NextjsDistribution', {
+            assetsBucket,
+        });
+
         new CfnOutput(this, 'CloudFrontDistributionDomain', {
             value: distribution.distributionDomainName,
         });
