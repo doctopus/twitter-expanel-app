@@ -1,8 +1,8 @@
-name: Deploy to AWS Lambda
+name: Deploy to AWS Lambda (NOT WORKING)
 
 on:
-  push:
-    branches: [master]
+#  push:
+#    branches: [master]
   workflow_dispatch:
 
 jobs:
